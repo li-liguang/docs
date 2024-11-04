@@ -88,7 +88,9 @@ kubectl create ingress demo --class=nginx \
 当浏览器访问[http://www.demo.io/](http://www.demo.io/)时，你可以看到一个写着“it works!”的html页面。恭喜您，您正在为一个在Kubernetes集群上托管的公共网站服务！ 🎉
 
 ## 特定环境说明
+
 ### 本地开发环境集群
+
 #### minikube
 入口控制器可以通过Minkube的加载项系统安装：
 ```bash
@@ -110,7 +112,7 @@ microk8s enable ingress
 
 首先，确认Docker设置中是否启用Kubernetes。命令`kubectl get nodes`需显示一个名为`docker-desktop`的单节点。
 在docker desktop可以使用默认快速启动说明，安装ingress控制器。
-在大部分系统中，如果没有其他`LoadBalancer`类型的service绑定到80端口，ingress控制器将被指派一个`localhost`的外部IP(`EXTERNAL_IP`)，这意味着它可以在本地通过`localhost:80`访问。如果不起作用，你可能需要回到[本地测试](本地测试)章节的`kubectl port-forward`方法描述。
+在大部分系统中，如果没有其他`LoadBalancer`类型的service绑定到80端口，ingress控制器将被指派一个`localhost`的外部IP(`EXTERNAL_IP`)，这意味着它可以在本地通过`localhost:80`访问。如果不起作用，你可能需要回到[本地测试](#本地测试)章节的`kubectl port-forward`方法描述。
 
 ### 云部署环境
 

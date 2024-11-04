@@ -4,8 +4,6 @@ title: 制作 RPM 软件包
 sidebar_label: 制作 RPM 软件包
 ---
 
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 本篇文章将引导您使用 `rpmbuild` 构建一个输出 Hello World 的 RPM 软件包。
 
 ## 安装
@@ -48,7 +46,7 @@ $ mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 |__ Makefile
 ```
 
-代码如下（点击<a href={useBaseUrl('')}>下载源文件</a>）：
+代码如下：
 
 ```c title="~/helloworld-1.0/main.c"
 #include <stdio.h>
@@ -143,7 +141,7 @@ $ cp helloworld-1.0.tar.gz ~/rpmbuild/SOURCES
 
 描述（`SPEC`）文件定义了`rpmbuild`如何构建和打包软件。我们的软件是一个 C 程序，必须将其编译并复制到相应的目录中以进行安装。
 
-我们在`~`目录下创建`helloworld.spec`文件，并添加软件打包的描述信息，如下所示（点击<a href={useBaseUrl('')}>下载 helloworld.spec 文件</a>）：
+我们在`~`目录下创建`helloworld.spec`文件，并添加软件打包的描述信息，如下所示：
 
 ```makefile title="~/helloworld.spec"
 Name: helloworld

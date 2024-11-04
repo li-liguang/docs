@@ -19,7 +19,7 @@ sidebar_label: JBoss官方文档[中文翻译版]
 本指南的目的是涵盖设置和维护JBoss EAP并在其上运行应用程序和其他服务。使用本指南之前要配置JBoss EAP，假定已下载最新版本的JBoss EAP，并且安装。有关安装说明，请参阅JBoss EAP安装指南。
 
 > 注：
->
+> 
 > 由于JBoss EAP的安装位置因主机而异，因此本指南将安装位置称为EAP_HOME。JBoss EAP的实际位置执行管理任务时，应使用安装而不是EAP_HOME。
 
 # 第二章 启动和停止`JBOSS EAP`
@@ -86,7 +86,7 @@ shutdown
 ```
 
 > 注：
->
+> 
 > 当运行在受管域里时，您必须在 shutdown 命令里用 --host 参数指定主机名来关闭服务器。
 
 ## 2.3 在 ADMIN-ONLY 模式下运行 JBOSS EAP
@@ -119,12 +119,10 @@ $ EAP_HOME/bin/standalone.sh --start-mode=admin-only
 }
 ```
 
-
-
 > 注：
->
+> 
 > 另外，您还可以用以下命令检查 JBoss EAP 的初始运行模式。
->
+> 
 > ```shell
 > /core-service=server-environment:read-attribute(name=initial-running-mode)
 > ```
@@ -134,22 +132,20 @@ $ EAP_HOME/bin/standalone.sh --start-mode=admin-only
  除了使用不同的运行时开关停止和启动JBoss EAP实例之外，管理`CLI`还可以用来在另一种模式下重加载JBoss EAP实例。
 
 * 在admin-only模式下重加载服务器：
-
+  
   ```shell
   reload --start-mode=admin-only
   ```
 
 * 在正常模式下重新加载服务器：
-
+  
   ```shell
   reload --start-mode=normal
   ```
-
+  
   注意：如果服务在admin-only模式下启动，并且没有在命令**reload**中使用参数**--start-mode**参数，那么服务将以普通模式启动。
 
 ### 在Admin-only模式下启动域模式
-
-
 
 ## 2.4 优雅的挂起和关闭 JBOSS EAP
 
@@ -202,29 +198,29 @@ JBoss EAP 7 引入了挂起模式，它会优雅的挂起服务器操作。该�
 您可以启动一个挂起状态的服务，启动后直到恢复服务，服务器将不接受任何请求。
 
 * 以挂起状态启动一个**独立模式**服务，启动 JBoss EAP 实例时使用`--start-mode=suspend`启动参数。
-
+  
   ```shell
   $ EAP_HOME/bin/standalone.sh --start-mode=suspend
   ```
 
 * 以挂起状态启动一个**域模式**服务，在管理`CLI`命令中，通过`start-mode=suspend`参数
-
+  
   ```shell
   /host=HOST_NAME/server-confit=SERVER_NAME:start(start-mode=suspend)
   ```
-
+  
   > **注**：
-  >
+  > 
   > 您还可以通过`start-mode`参数来`reload`和`restart`服务器。
 
 * 以挂起状态启动**域模式下所有的**服务器，在管理`CLI`命令中，通过`start-mode=suspend`参数
-
+  
   ```shell
   /server-group=SERVER_GROUP_NAME:start-servers(start-mode=suspend)
   ```
-
+  
   > **注**：
-  >
+  > 
   > 您还可以通过`start-mode`参数来`reload-servers`和`restart-servers`服务器群组。
 
 ### 2.4.2 优雅的关闭服务器
@@ -254,7 +250,7 @@ JBoss EAP 7 引入了挂起模式，它会优雅的挂起服务器操作。该�
 
 ### 2.5.2 停止 JBoss EAP（RPM安装）
 
-## 2.6  POWERSHELL脚本（WINDOWS服务器） 
+## 2.6  POWERSHELL脚本（WINDOWS服务器）
 
 # 第三章 JBOSS EAP 管理
 
@@ -291,41 +287,47 @@ JBoss EAP中不同功能的切面配置在不同的*subsystems*子系统中。�
 ### 3.2.1 添加管理用户
 
 1. 运行`add-user`实用脚本，并根据提示操作。
-
+   
    ```shell
    $ EAP_HOME/bin/add-user.sh
    ```
-
+   
    > 注：Windows服务，使用`EAP_HOME/bin/add-user.bak`脚本。
 
 2. 点击*回车* 选择默认选项**a**用来添加管理用户，该用户会被添加到*ManagementRealm*，并且将被授可以使用管理控制台或管理CLI执行管理操作。
-
+   
    另一个选项**b**，则用户会被添加到*ApplicationRealm*，该用户将用于应用程序，不提供特定权限。
 
 3. 输入用户名和密码。系统会提示您确认密码。
-
-   >**注**：
-   >
-   >用户名只能包含以下任意数量、任意位置的字符：
-   >
-   >* 字母和数字（a-z，A-Z，0-9）
-   >* 破折号（-），句号（.），逗号（,），以及@符号
-   >* 反斜线（\）
-   >* 等于号（=）
-
+   
+   > **注**：
+   > 
+   > 用户名只能包含以下任意数量、任意位置的字符：
+   > 
+   > * 字母和数字（a-z，A-Z，0-9）
+   > * 破折号（-），句号（.），逗号（,），以及@符号
+   > * 反斜线（\）
+   > * 等于号（=）
+   
    默认的， JBoss EAP允许弱密码，但是会有警告信息。
-
-   您还可以查看 [3.2.3 设置添加用户程序的密码限制](#3.2.3设置添加用户程序的密码限制)来改变这一默认行为。
+   
+   您还可以查看 [3.2.3 设置添加用户程序的密码限制](#3.2.3 设置添加用户程序的密码限制)来改变这一默认行为。
 
 4. 输入用户所属的群组（多个群组以逗号分隔）。如果您不想设置用户所属群组，可直接点击*回车键*，进行下一步操作。
 
 5. 查看信息，并输入`yes`确定。
 
 6. 确定此用户是否表示远程JBoss EAP服务器实例。如果是一个基础的管理用户，则输入**no**。
-
+   
    *以下内容省略*
 
-   
+### 3.2.2
+
+
+
+### 3.2.3 设置添加用户程序的密码限制
+
+
 
 ## 3.6 配置数据
 
@@ -335,13 +337,13 @@ JBoss EAP中不同功能的切面配置在不同的*subsystems*子系统中。�
 
 表 3.1 独立配置文件
 
-| Configuratino File           | Purpose                                                      |
-| :--------------------------- | :----------------------------------------------------------- |
+| Configuratino File           | Purpose                                                                                                                                |
+|:---------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------- |
 | standalone.xml               | 此独立配置文件是独立模式启动服务器时的默认配置文件。它包含关于服务器的所有信息，包括：subsystems子系统，networking网络，deployments部署，socket bindings套接字绑定，以及其他详细配置。它不提供消息传递或高可用性所必需的子系统 |
-| standalone-ha.xml            | 这个独立配置文件包括所有的默认子系统并添加了用于高可用性的modcluster和 jgroups 子系统。它没有提供消息所必需的子系统。 |
-| standalone-full.xml          | 这个独立配置文件包括所有的默认子系统并添加了 messaging-activemq 和 iiop-openjdk子系统。它没有提供高可用性所必需的子系统。 |
-| standalone-full-ha.xml       | 这个独立配置文件包含对每种可能的子系统的支持，包括用于消息和高可用性的子系统。 |
-| standalone-load-balancer.xml | 这个独立配置文件包含使用内建 mod_cluster 前端负载均衡器对其他 JBoss EAP实例进行负载均衡所需的最少子系统。 |
+| standalone-ha.xml            | 这个独立配置文件包括所有的默认子系统并添加了用于高可用性的modcluster和 jgroups 子系统。它没有提供消息所必需的子系统。                                                                   |
+| standalone-full.xml          | 这个独立配置文件包括所有的默认子系统并添加了 messaging-activemq 和 iiop-openjdk子系统。它没有提供高可用性所必需的子系统。                                                          |
+| standalone-full-ha.xml       | 这个独立配置文件包含对每种可能的子系统的支持，包括用于消息和高可用性的子系统。                                                                                                |
+| standalone-load-balancer.xml | 这个独立配置文件包含使用内建 mod_cluster 前端负载均衡器对其他 JBoss EAP实例进行负载均衡所需的最少子系统。                                                                       |
 
 在默认情况下，以独立服务器方式启动 JBoss EAP 将使用 standalone.xml 文件。要用不同的配置集
 启动 JBoss EAP，请使用**--server-config** 选项。例如：
@@ -356,12 +358,12 @@ $ EAP_HOME/bin/standalone.sh --server-config=standalone-full.xml
 
 表 3.2 受管域配置文件
 
-| Configuration File | Purpose                                                      |
-| ------------------ | ------------------------------------------------------------ |
-| domain.xml         | 这是用于受管域的主要配置文件。只有域主控制器会读取这个文件。它包含所有配置集的配置（default、ha、full、full-ha、load-balancer）。 |
+| Configuration File | Purpose                                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| domain.xml         | 这是用于受管域的主要配置文件。只有域主控制器会读取这个文件。它包含所有配置集的配置（default、ha、full、full-ha、load-balancer）。                                     |
 | host.xml           | 这个文件包含了受管域里的物理主机专有的配置细节，如网络接口、套接字绑定、主机名称和其他主机专有的细节。 host.xml 文件包含了  host-master.xml 和  host-slave.xml 的全部功能，正如下面所描述的。 |
-| host-master.xml    | 这个文件只包含将服务器作为主域控制器运行所需的配置细节。     |
-| host-slave.xml     | 这个文件只包含将服务器作为受管域主机控制器运行所需的配置细节。 |
+| host-master.xml    | 这个文件只包含将服务器作为主域控制器运行所需的配置细节。                                                                                          |
+| host-slave.xml     | 这个文件只包含将服务器作为受管域主机控制器运行所需的配置细节。                                                                                       |
 
 在默认情况下，以受管域方式启动 JBoss EAP 将使用 host.xml 文件。要用不同的配置集启动 JBoss
 EAP，请使用 **--host-config** 选项。例如：
@@ -401,9 +403,9 @@ $ EAP_HOME/bin/domain.sh --host-config=host-master.xml
 ```shell
 :take-snapshot
 {
-	"outcome" => "success",
-	"result" =>
-		"EAP_HOME/standalone/configuration/standalone_xml_history/snapshot/20151022-				133109702standalone.xml"
+    "outcome" => "success",
+    "result" =>
+        "EAP_HOME/standalone/configuration/standalone_xml_history/snapshot/20151022-                133109702standalone.xml"
 }
 ```
 
@@ -414,15 +416,15 @@ $ EAP_HOME/bin/domain.sh --host-config=host-master.xml
 ```shell
 :list-snapshots
 {
-	"outcome" => "success",
-	"result" => {
-		"directory" =>
-			"EAP_HOME/standalone/configuration/standalone_xml_history/snapshot",
-		"names" => [
+    "outcome" => "success",
+    "result" => {
+        "directory" =>
+            "EAP_HOME/standalone/configuration/standalone_xml_history/snapshot",
+        "names" => [
             "20151022-133109702standalone.xml",
             "20151022-132715958standalone.xml"
-		]
-	}
+        ]
+    }
 }
 ```
 
@@ -452,18 +454,14 @@ $ EAP_HOME/bin/standalone.sh --server-config=standalone_xml_history/snapshot/201
 JBoss EAP 提供了跟踪对正在运行的系统所做的配置更改的能力。这允许管理员用户查看，其他授权用户所做的配置文件修改历史记录。
 
 > **重要提示**：
->
+> 
 >  更改存储在内存中，不会在服务器重新启动之间持久化。此功能不能替代[管理审核日志记录](#)。 
 
 您可以使用管理CLI或者管理控制台启用跟踪和查看配置更改。
 
 #### 使用管理CLI启用跟踪和查看配置更改
 
-
-
 #### 使用管理控制台启用跟踪和查看配置更改
-
-
 
 ### 3.6.6 属性替换
 
@@ -476,7 +474,7 @@ JBoss EAP 允许您使用表达式来定义代替配置中字面值的可替换�
 
 ```xml
 <interface name="public">
-	<inet-address value="${jboss.bind.address:127.0.0.1}" />
+    <inet-address value="${jboss.bind.address:127.0.0.1}" />
 </interface>
 ```
 
@@ -560,32 +558,32 @@ JBoss EAP 对文件系统路径使用逻辑名称。 然后，配置的其他区
 
 **表 3.3 标准路径**
 
-| Property                    | Description                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| java.home                   | Java安装目录                                                 |
+| Property                    | Description                                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------------------------ |
+| java.home                   | Java安装目录                                                                                               |
 | jboss.controller.temp.dir   | 独立服务器和托管域的公用别名。用于临时文件存储的目录。<br/>在独立服务器中等价于`jboss.server.temp.dir`，<br/>在托管域中等价于`jboss.domain.temp.dir` |
-| jboss.domain.base.dir       | 域内容的基础目录                                             |
-| jboss.domain.config.dir     | 域配置文件的目录                                             |
-| jboss.domain.data.dir       | 域将用于永久数据文件存储的目录                               |
-| jboss.domain.log.dir        | 域将用于永久日志文件存储的目录                               |
-| jboss.domain.temp.dir       | 域将用于临时文件存储的目录                                   |
-| jboss.domain.deployment.dir | 域将用于存储已部署内容的目录                                 |
-| jboss.domain.servers.dir    | 域将用于存储托管域实例的输出的目录                           |
-| jboss.home.dir              | JBOSS EAP的根目录                                            |
-| jboss.server.base.dir       | 独立服务器内容的基本目录                                     |
-| jboss.server.config.dir     | 独立服务器配置文件的基本目录                                 |
-| jboss.server.data.dir       | 独立服务器将用于永久数据文件存储的目录                       |
-| jboss.server.log.dir        | 独立服务器将用于日志文件存储的目录                           |
-| jboss.server.temp.dir       | 独立服务器将用于临时文件存储的目录                           |
-| jboss.server.deploy.dir     | 独立服务器将用于存储已部署内容的目录                         |
-| user.dir                    | 用户的当前工作目录                                           |
-| user.home                   | 用户的根目录                                                 |
+| jboss.domain.base.dir       | 域内容的基础目录                                                                                               |
+| jboss.domain.config.dir     | 域配置文件的目录                                                                                               |
+| jboss.domain.data.dir       | 域将用于永久数据文件存储的目录                                                                                        |
+| jboss.domain.log.dir        | 域将用于永久日志文件存储的目录                                                                                        |
+| jboss.domain.temp.dir       | 域将用于临时文件存储的目录                                                                                          |
+| jboss.domain.deployment.dir | 域将用于存储已部署内容的目录                                                                                         |
+| jboss.domain.servers.dir    | 域将用于存储托管域实例的输出的目录                                                                                      |
+| jboss.home.dir              | JBOSS EAP的根目录                                                                                          |
+| jboss.server.base.dir       | 独立服务器内容的基本目录                                                                                           |
+| jboss.server.config.dir     | 独立服务器配置文件的基本目录                                                                                         |
+| jboss.server.data.dir       | 独立服务器将用于永久数据文件存储的目录                                                                                    |
+| jboss.server.log.dir        | 独立服务器将用于日志文件存储的目录                                                                                      |
+| jboss.server.temp.dir       | 独立服务器将用于临时文件存储的目录                                                                                      |
+| jboss.server.deploy.dir     | 独立服务器将用于存储已部署内容的目录                                                                                     |
+| user.dir                    | 用户的当前工作目录                                                                                              |
+| user.home                   | 用户的根目录                                                                                                 |
 
-您也可以替[代标准路径](3.7.2)或[添加自定义路径](3.7.3)。
+您也可以[替代标准路径](#372-替换标准路径)或[添加自定义路径](#373-添加自定义路径)。
 
 ### 3.7.1 查看文件系统路径
 
-### 3.7.2替换标准路径
+### 3.7.2 替换标准路径
 
 ### 3.7.3 添加自定义路径
 
@@ -625,7 +623,7 @@ JBoss EAP 对文件系统路径使用逻辑名称。 然后，配置的其他区
 
 ### 3.11.1 使用核心管理子系统监视服务器生命周期事件
 
-### 3.11.2  使用JMX通知监视服务器生命周期事件 
+### 3.11.2  使用JMX通知监视服务器生命周期事件
 
 # 第四章 网络和端口配置
 
@@ -640,13 +638,13 @@ JBoss EAP 对文件系统路径使用逻辑名称。 然后，配置的其他区
 当部署应用程序时， 您可能希望通过将`org.jboss.metadata.parser.validate system`属性设置为`true`来启用部署描述符的验证，这可以通过以下方法之一完成：
 
 * 在启动服务器时
-
+  
   ```shell
   $ EAP_HOME/bin/standalone.sh -Dorg.jboss.metadata.parser.validate=true
   ```
 
 * 使用以下管理CLI命令添加到服务配置中
-
+  
   ```shell
   /system-property=org.jboss.metadata.parser.validate:add(value=true)
   ```
@@ -727,9 +725,9 @@ deployment-info
 这会输出部署的详细信息，例如：运行名称、部署状态，以及是否禁用。
 
 ```shell
-NAME					RUNTIME-NAME			PERSISTENT	ENABLED	STATUS
-helloworld.war			helloworld.war			true		true	OK
-test-application.war 	test-application.war 	true 		true	OK
+NAME                    RUNTIME-NAME            PERSISTENT    ENABLED    STATUS
+helloworld.war            helloworld.war            true        true    OK
+test-application.war     test-application.war     true         true    OK
 ```
 
 您还可以通过部署名过滤，添加`--name`参数：
@@ -738,7 +736,7 @@ test-application.war 	test-application.war 	true 		true	OK
 deployment-info --name=test-app.war
 ```
 
-### 7.1.2  使用管理CLI在托管域中部署应用程序部署应用程序 
+### 7.1.2  使用管理CLI在托管域中部署应用程序部署应用程序
 
 #### 部署应用
 
@@ -814,8 +812,6 @@ deployment-info --name=test-app.war
 
 ### 7.8.1 浏览文件夹中的文件
 
-
-
 # 第八章 域管理
 
 # 第九章 配置JVM设置
@@ -837,7 +833,7 @@ deployment-info --name=test-app.war
 Windows服务器)，位于`EAP_HOME/bin`文件夹中，其中包含传递给JVM的选项示例。
 
 > 警告：
->
+> 
 >  设置JAVA_OPTS环境变量将覆盖standalone.conf中的默认值，这可能会导致JBoss EAP启动问题。 
 
 # 第十章 邮件子系统
@@ -852,7 +848,7 @@ Windows服务器)，位于`EAP_HOME/bin`文件夹中，其中包含传递给JVM�
 
 # 第十五章 JAVA CONNECTOR ARCHITECTURE (JCA)配置
 
-# 第十六章  配置WEB服务器（下载） 
+# 第十六章  配置WEB服务器（下载）
 
 # 第十七章 配置远程处理
 
@@ -860,7 +856,7 @@ Windows服务器)，位于`EAP_HOME/bin`文件夹中，其中包含传递给JVM�
 
 # 第十九章 配置WebServices
 
-# 第二十章 配置JAVASERVER FACES (JSF) 
+# 第二十章 配置JAVASERVER FACES (JSF)
 
 # 第二十一章 配置批处理程序
 
@@ -869,6 +865,3 @@ Windows服务器)，位于`EAP_HOME/bin`文件夹中，其中包含传递给JVM�
 # 第二十三章 配置高可用性
 
 # 附录A 参考材料
-
-
-

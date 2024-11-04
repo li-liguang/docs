@@ -219,7 +219,7 @@ Deleting outdated charts
 
 > 如果是通过离线下载Chart源码安装，需要将创建好的`gitea.yaml`文件以及`gitea-helm/`文件夹，一同上传到K8S集群服务器上。
 
-这里根据最终访问`Gitea`应用的协议不同，提供两个版本的配置文件。如果采用`HTTP`版本的部署安装后，需要升级为`HTTPS`，可按照[设置HTTPS访问](#设置HTTPS访问)小节说明进行配置，或者整体替换为HTTPS版本的`yaml`文件后，更新应用。
+这里根据最终访问`Gitea`应用的协议不同，提供两个版本的配置文件。如果采用`HTTP`版本的部署安装后，需要升级为`HTTPS`，可按照[设置HTTPS访问](#设置https访问)小节说明进行配置，或者整体替换为HTTPS版本的`yaml`文件后，更新应用。
 
 #### HTTP版
 
